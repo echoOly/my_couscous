@@ -1,0 +1,50 @@
+{
+    "action": "search",
+    "show_app":true,
+    "show_host":true,
+    "parameters": [
+        {
+            "name": "word",
+            "title": "搜索关键字",
+            "required": true,
+            "default": "微信"
+        },
+        {
+            "name": "dpi",
+            "title": "屏幕密度",
+            "required": true,
+            "default": "320"
+        },
+        {
+            "name": "class",
+            "title": "资源类型",
+            "required": false,
+            "default": [
+                {
+                    "name":"混合检索",
+                    "value":""
+                },
+                {
+                    "name":"检索游戏",
+                    "value":"g"
+                },
+                {
+                    "name":"检索软件",
+                    "value":"s"
+                }
+            ]
+        },
+        {
+            "name": "pn",
+            "title": "偏移量",
+            "required": true,
+            "default": "0"
+        },
+        {
+            "name": "rn",
+            "title": "每页数",
+            "required": true,
+            "default": "10"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+template:
+    directory: .
+
+github:
+    user: CouscousPHP
+    repo: Template-Light
+
+title: Couscous Light
+subTitle: An amazing template for Couscous.
+baseUrl: couscous/
+
+# The left menu bar
+menu:
+    items:
+        board:
+            text: board
+            # You can use relative urls
+            relativeUrl: ./docs/intro/board.html
+        search:
+            text: search
+            # Or absolute urls
+            #absoluteUrl: http://couscous.io
+            relativeUrl: ./docs/intro/search.html

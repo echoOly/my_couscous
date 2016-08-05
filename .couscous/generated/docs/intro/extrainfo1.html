@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Couscous Light</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+        
+    </head>
+    <style>
+    red{color: red;}
+    blockquote{font-style: italic}
+    h2{
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+    }
+    blockquote.bs-callout.bs-callout-warning {
+        background-color: #FFF8D3;
+        border-color: #EBC372;
+    }
+    </style>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Couscous Light
+                <small class="hidden-xs hidden-sm">
+                    An amazing template for Couscous.
+                </small>
+            </a>
+
+                            <a href="https://github.com/CouscousPHP/Template-Light">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/./docs/intro/board.html">
+                                        board
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/./docs/intro/search.html">
+                                        search
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10 markdown-body">
+                    <h3 id="signmd5">signmd5生成算法</h3>
+<hr />
+<p>处理过程为：</p>
+<ul>
+<li>读取应用的签名，android签名相关资料可参照网页：<a href="http://developer.android.com/guide/publishing/app-signing.html">http://developer.android.com/guide/publishing/app-signing.html</a></li>
+<li>对公钥进行MD5签名；</li>
+<li>对MD5签名信息进行Hash运算，Java实现示例代码片段如下：</li>
+</ul>
+<p>1、读取安装应用签名：</p>
+<pre><code class="language-java">context.getPackageManager().getPackageInfo(packageName,
+                    PackageManager.GET_SIGNATURES);</code></pre>
+<p>2、根据packageinfo计算签名的MD5值：</p>
+<pre><code class="language-java">public String getMd5(PackageInfo packageinfo) {
+    if (packageinfo == null) return null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(packageinfo.signatures[0].toCharsString().getBytes());
+            byte[] b = md.digest();
+            char[] HEXCHAR = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9','a‘, 'b‘, 'c', 'd', 'e', 'f' };
+            StringBuilder sb = new StringBuilder(b.length * 2);
+            for (int i = 0; i &lt; b.length; i++) {
+                sb.append(HEXCHAR[(b[i] &amp; 0xf0) &gt;&gt;&gt; 4]);
+                sb.append(HEXCHAR[b[i] &amp; 0x0f]);
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+}</code></pre>
+<p>3、根据MD5值计算signmd5值：</p>
+<pre><code class="language-java">public String creatSignInt(String md5) {
+    if (md5 == null || md5.length() &lt; 32)  return "-1";
+    String sign = md5.substring(8, 8 + 16);
+    long id1 = 0;
+    long id2 = 0;
+    String s = "";
+    for (int i = 0; i &lt; 8; i++) {
+        id2 *= 16;
+        s = sign.substring(i, i + 1);
+        id2 += Integer.parseInt(s, 16);
+    }
+    for (int i = 8; i &lt; sign.length(); i++) {
+        id1 *= 16;
+        s = sign.substring(i, i + 1);
+        id1 += Integer.parseInt(s, 16);
+    }
+    long id = (id1 + id2) &amp; 0xFFFFFFFFL;
+    return String.valueOf(id);
+}</code></pre>
+<h5 id="">示例</h5>
+<h6 id="-1">签名：</h6>
+<p>308201923081fca00302010202044d3c2820300d06092a864886f70d0101050500300d310b300906035504031302796b3020170d3131303132333133303734345a180f32303831303130353133303734345a300d310b300906035504031302796b30819f300d06092a864886f70d010101050003818d003081890281810095a1a931cc6bbc8899441e614f469104e2520a95ff90942ba177d336d98b1a5d6a637a0e95d1a3cc630537ecb1a5c708b5751d8f13bf8ba993b95748ed15b87c6dc22bf76e97f7ad68d86cad686752a48ce0cba009065a5f17650ab2301b9b871e3d0682712c0914a6b97df5b15ad15c14f080410b562973f830f31a31a75f970203010001300d06092a864886f70d0101050500038181002e5332040bde9448f53c63472c3a210da2101afe353538253072d643f089eb7eab68f0db2cedfb115bb73d2116db5fc0f516259f41ac0c04ee3b5e00710469d654b2d17a8330ad601e58f8d630afbc75420b9c55f62de033bcf02bdd9a1014d376576d048bebbe84a88826d9230527b5078bf08724cafb847ae64fa0e9aca40f</p>
+<h6 id="md5">MD5：</h6>
+<p>0f3c509eef614432e414ce9d37f00c80</p>
+<h6 id="signmd5-1">Signmd5：</h6>
+<p>3547730639</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

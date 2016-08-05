@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Couscous Light</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+        
+    </head>
+    <style>
+    red{color: red;}
+    blockquote{font-style: italic}
+    h2{
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+    }
+    blockquote.bs-callout.bs-callout-warning {
+        background-color: #FFF8D3;
+        border-color: #EBC372;
+    }
+    </style>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Couscous Light
+                <small class="hidden-xs hidden-sm">
+                    An amazing template for Couscous.
+                </small>
+            </a>
+
+                            <a href="https://github.com/CouscousPHP/Template-Light">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/./docs/intro/board.html">
+                                        board
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/./docs/intro/search.html">
+                                        search
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10 markdown-body">
+                    <h2 id="actioncateampid">分类接口【action=cate&amp;id=*】</h2>
+<p>获取某分类应用列表</p>
+<h2 id="">请求说明</h2>
+<h3 id="url">URL</h3>
+<blockquote>
+<p><a href="http://m.baidu.com/api?action=cate&id">http://m.baidu.com/api?action=cate&id</a>=*</p>
+</blockquote>
+<h3 id="-1">请求方式</h3>
+<blockquote>
+<p>GET</p>
+</blockquote>
+<h3 id="-2">支持格式</h3>
+<blockquote>
+<p>JSON/XML (默认XML)</p>
+</blockquote>
+<h3 id="-3">请求参数</h3>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>备注</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from</td>
+<td>来源，合作方标识，由百度BD提供</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>token</td>
+<td>标记，由百度分配的唯一的token，用于验证请求方的合法性</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>type</td>
+<td>服务类别，type=app，对于android，type的值为app</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>id</td>
+<td>分类id 参见<a href="/api?bdi_docs=1&amp;action=intro&amp;source=natintro_catelist" title="数据接口》分类列表">数据接口》分类列表</a></td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>ua</td>
+<td>终端分辨率，机型信息</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>用户唯一标识</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_mac</td>
+<td>无线网卡mac地址</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_cid</td>
+<td>基站id</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_bear</td>
+<td>联网类型</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>dpi</td>
+<td>分辨率，宽_高，如320_640，用于适配</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>apilevel</td>
+<td>API Level，用于适配</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>rn</td>
+<td>每页显示结果数，默认rn=10，最大值为20</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>pn</td>
+<td>偏移量，默认pn=0，即第一页，必须为rn的整数倍</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>sorttype</td>
+<td>排序方式，默认hot(热门)，可选值为new(新品)</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="bs-callout bs-callout-warning" style="padding:10px"><h4 id="-4">注意</h4>为更好进行机型和网络适配，对于所有请求参数，尽可能携带可选参数</blockquote>
+<h2 id="-5">返回结果</h2>
+<h3 id="xml">XML示例</h3>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;response&gt;
+    &lt;statuscode&gt;0&lt;/statuscode&gt;
+    &lt;statusmessage&gt;done&lt;/statusmessage&gt;
+    &lt;result&gt;
+        &lt;title&gt;
+            &lt;![CDATA[旅游出行]]&gt;
+        &lt;/title&gt;
+        &lt;pn&gt;0&lt;/pn&gt;
+        &lt;rn&gt;2&lt;/rn&gt;
+        &lt;disp_num&gt;300&lt;/disp_num&gt;
+        &lt;ret_num&gt;1&lt;/ret_num&gt;
+        &lt;apps&gt;
+            &lt;app&gt;
+                &lt;sname&gt;
+                    &lt;![CDATA[百度地图]]&gt;
+                &lt;/sname&gt;
+                &lt;docid&gt;9150118&lt;/docid&gt;
+                &lt;catename&gt;
+                    &lt;![CDATA[旅游出行]]&gt;
+                &lt;/catename&gt;
+                &lt;size&gt;47371918&lt;/size&gt;
+                &lt;download_url&gt;
+                    &lt;![CDATA[http://m.baidu.com/api?action=redirect&amp;token=91zhuomian&amp;from=1013018b&amp;type=app&amp;dltype=new&amp;tj=soft_9150118_1895482625_%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE&amp;blink=4c61687474703a2f2f612e67646f776e2e62616964752e636f6d2f646174612f7769736567616d652f663231303063663765353237333731352f6261696475646974755f3734302e61706b3f66726f6d3d61313130311757&amp;crversion=1&amp;f=gyve8gaM2og2u2ibgavv8_yFvzgPu28tgu29iga_vz_Ka28F_yvV8_ab2ig0P28U_42Atgav2i_Oa2o-ga2moga12i_CaviU_a2vogPDvzg0avzb_422igOY2igpa2zGgavszgPDv8gJ428UguvUiyWuB&amp;refp=action_cate@id_509]]&gt;
+                &lt;/download_url&gt;
+                &lt;icon&gt;
+                    &lt;![CDATA[http://cdn00.baidu-img.cn/timg?vsapp&amp;size=b800_800&amp;quality=100&amp;imgtype=3&amp;er&amp;sec=0&amp;di=bfb97d581e08a09db0b73408e5549393&amp;ref=http%3A%2F%2Fg.hiphotos.bdimg.com&amp;src=http%3A%2F%2Fg.hiphotos.bdimg.com%2Fwisegame%2Fpic%2Fitem%2Fcfaf2edda3cc7cd92b506b753e01213fb80e9119.jpg]]&gt;
+                &lt;/icon&gt;
+                &lt;versionname&gt;9.1.5&lt;/versionname&gt;
+                &lt;updatetime&gt;2016-04-12&lt;/updatetime&gt;
+                &lt;icon_source&gt;
+                    &lt;![CDATA[http://cdn00.baidu-img.cn/timg?vsapp&amp;size=b800_800&amp;quality=100&amp;imgtype=3&amp;er&amp;sec=0&amp;di=d1fdd41a740ae1e487d991d2845d150a&amp;ref=http%3A%2F%2Fa.hiphotos.bdimg.com&amp;src=http%3A%2F%2Fa.hiphotos.bdimg.com%2Fwisegame%2Fpic%2Fitem%2F2836acaf2edda3cce44dfa8e06e93901203f92f7.jpg]]&gt;
+                &lt;/icon_source&gt;
+                &lt;brief&gt;
+                    &lt;![CDATA[5亿人都在用的百度地图&lt;br&gt;【功能介绍】&lt;br&gt;最全最准手机地图，专业智能语音导航。&lt;br&gt;探索周边美食娱乐。在线订机票、酒店更享多重优惠。&lt;br&gt;明星趣味语音导航，躲避拥堵路线规划，实时公交多城市覆盖&lt;br&gt;海量地点信息，及时更新，查哪儿都知道&lt;br&gt;优步、专车、顺风车随叫随到&lt;br&gt;更有离线地图，节省流量。收藏夹可以同步云端，实现电脑、手机、Pad三端贯通，永不丢失。&lt;br&gt;【温馨提示】&lt;br&gt;Android 2.X系统的用户，百度地图专门为您准备了稳定的优化版本，请移步手机地图官网(http://wuxian.baidu.com/map/)下载使用。语音导航和电子狗会持续使用GPS定位服务，切换至后台播报时，仍会保持GPS连接，相比其他操作会消耗更多的电量。&lt;br&gt;【江湖救急】遇到问题请快速联系我们&lt;br&gt;用户论坛：http://tieba.baidu.com/百度地图&lt;br&gt;官方微博：http://weibo.com/n/百度地图&lt;br&gt;微信公共号搜索： baiduditu&lt;br&gt;您还可以直接在应用内“我的-帮助与反馈”中进行反馈，我们将在第一时间处理您的问题。]]&gt;
+                &lt;/brief&gt;
+                &lt;lang&gt;中文&lt;/lang&gt;
+                &lt;adv_item&gt;source+NATURAL@boardid+87@pos+1@terminal_type+client&lt;/adv_item&gt;
+                &lt;package&gt;com.baidu.BaiduMap&lt;/package&gt;
+                &lt;iconhdpi&gt;
+                    &lt;![CDATA[http://cdn00.baidu-img.cn/timg?vsapp&amp;size=b800_800&amp;quality=100&amp;imgtype=3&amp;er&amp;sec=0&amp;di=3d3a14556a6ca6397acb55144abbd8be&amp;ref=http%3A%2F%2Fa.hiphotos.bdimg.com&amp;src=http%3A%2F%2Fa.hiphotos.bdimg.com%2Fwisegame%2Fpic%2Fitem%2Fb258ccbf6c81800ac1efd6a2b63533fa828b4710.jpg]]&gt;
+                &lt;/iconhdpi&gt;
+            &lt;/app&gt;
+            ...
+        &lt;/apps&gt;
+    &lt;/result&gt;
+&lt;/response&gt;</code></pre>
+<h3 id="-6">返回字段说明</h3>
+<hr />
+<p>参见 <a href="/api?bdi_docs=1&amp;action=intro&amp;source=natintro_extrainfo4" title="附录4》返回APP字段说明">附录4》返回APP字段说明</a></p>
+<h3 id="-7">错误示例</h3>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;response&gt;
+    &lt;statuscode&gt;108&lt;/statuscode&gt;
+    &lt;statusmessage&gt;[from] , param is signed in a wrong type&lt;/statusmessage&gt;
+&lt;/response&gt;</code></pre>
+<h3 id="-8">错误说明</h3>
+<p>参见 <a href="/api?bdi_docs=1&amp;action=intro&amp;source=natintro_extrainfo4" title="附录4》返回码对照表">附录4》返回码对照表</a></p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

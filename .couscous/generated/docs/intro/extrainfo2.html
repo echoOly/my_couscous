@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Couscous Light</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+        
+    </head>
+    <style>
+    red{color: red;}
+    blockquote{font-style: italic}
+    h2{
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+    }
+    blockquote.bs-callout.bs-callout-warning {
+        background-color: #FFF8D3;
+        border-color: #EBC372;
+    }
+    </style>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Couscous Light
+                <small class="hidden-xs hidden-sm">
+                    An amazing template for Couscous.
+                </small>
+            </a>
+
+                            <a href="https://github.com/CouscousPHP/Template-Light">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/./docs/intro/board.html">
+                                        board
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/./docs/intro/search.html">
+                                        search
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10 markdown-body">
+                    <h3 id="">数据加密算法</h3>
+<hr />
+<p>为保证用户隐私数据，需要对用户提交的敏感数据进行加密处理，说明如下：</p>
+<ol>
+<li>获取AES加密需要的key。将渠道号与密钥（API平台提供）拼接，然后获取拼接生成字符串的md5值并取后16位，最后将截取后的结果全部转为大写。</li>
+<li>处理AES加密需要的iv值。iv向API平台申请即可，如果申请到的iv值不足16位，需要用字符“0”补足。</li>
+<li>填充原文数据。具体算法见示例。</li>
+<li>AES加密模式为CBC，实现算法为RIJNDAEL算法。具体初始化方式见示例。</li>
+<li>生成的密文需要进行base64编码处理，并进行urlencode。</li>
+</ol>
+<p>Java示例程序(要求jdk1.8):</p>
+<pre><code class="language-java">/*
+ * Copyright (C) 2015 Baidu Inc. All rights reserved.
+ */
+package com.baidu.example;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+/**
+ * 
+ * @author yuanxingzhong
+ * @since 2015年12月16日
+ */
+public final class AESUtility {
+
+    /**
+     * 加密，先aes，再base64再urlencode
+     * @param rawStr
+     * @param key
+     * @param iv
+     * @return
+     */
+    public static String encode(String rawStr, String from, String key, String iv) {
+        if (null == rawStr || null == key || rawStr.isEmpty() || key.isEmpty()) {
+            System.err.println("加密的必要参数为空，加密失败！");
+            return null;
+        }
+        byte[] aesBytes = AESEncode(rawStr, from, key, iv);
+        if (null == aesBytes) {
+            System.err.println("aes加密失败");
+            return null;
+        }
+
+        String base64Encode = Base64.getEncoder().encodeToString(aesBytes);
+
+        String urlEncodeStr =  URLEncoder.encode(base64Encode);
+
+        return urlEncodeStr;
+    }
+
+    /**
+     * 对字符串进行aes加密
+     * @param rawStr
+     * @param key
+     * @param iv
+     * @return
+     */
+    private static byte[] AESEncode(String rawStr, String from, String key, String iv) {
+        try {
+            IvParameterSpec ivParam = null;
+            if (null != iv &amp;&amp; !iv.isEmpty()) {
+                ivParam = new IvParameterSpec(generateIV(iv));
+            }
+
+            String strMd5 = toMd5(from + key);
+            if (null == strMd5) {
+                System.err.println("生成key失败！");
+                return null;
+            }
+            byte[] strBytes = strMd5.getBytes("utf-8");
+
+            SecretKeySpec cipherKey = new SecretKeySpec(strBytes, strBytes.length / 2, strBytes.length / 2, "AES");
+
+            Cipher encodeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            if (null != ivParam) {
+                encodeCipher.init(Cipher.ENCRYPT_MODE, cipherKey, ivParam);
+            } else {
+                encodeCipher.init(Cipher.ENCRYPT_MODE, cipherKey);
+            }
+
+            return encodeCipher.doFinal(rawStr.getBytes("utf-8"));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static byte[] generateIV(String iv) {
+        if (null == iv || iv.isEmpty()) {
+            return null;
+        }
+        try {
+            byte[] ivBytes = iv.getBytes("utf-8");
+            return Arrays.copyOf(ivBytes, 16);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 获取字符串的md5
+     * @param str
+     * @return
+     */
+    public static String toMd5(String str){  
+        try {  
+            MessageDigest md5 = MessageDigest.getInstance("MD5");  
+            byte[] bytes = md5.digest(str.getBytes("utf-8"));
+            if (null != bytes) {
+                return parseByte2HexStr(bytes);
+            }
+        } catch (NoSuchAlgorithmException e) {  
+            e.printStackTrace();  
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将二进制转换成16进制 
+     * @param buf 
+     * @return 
+     */  
+    public static String parseByte2HexStr(byte buf[]) {  
+        if (null == buf) {
+            return null;
+        }
+        StringBuffer sb = new StringBuffer();  
+        for (int i = 0; i &lt; buf.length; i++) {  
+            String hex = Integer.toHexString(buf[i] &amp; 0xFF);  
+            if (hex.length() == 1) {  
+                hex = '0' + hex;  
+            }  
+            sb.append(hex.toUpperCase());  
+        }  
+        return sb.toString();  
+    } 
+
+}</code></pre>
+<p>.net示例程序：</p>
+<p>```.net
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;</p>
+<p>namespace YYGJ.CollectApp.Job.JobHelpers.Helper
+{
+public class BDAESUtility
+{
+/**</p>
+<ul>
+<li>加密，先aes，再base64再urlencode</li>
+<li>@param rawStr</li>
+<li>@param key</li>
+<li>@param iv</li>
+<li>
+<p>@return
+*/
+public static string Encode(string rawStr, string key, string channel, string iv)
+{
+if (null == rawStr || null == key || string.IsNullOrEmpty(rawStr) || string.IsNullOrEmpty(key))
+{
+//加密的必要参数为空，加密失败！
+return null;
+}
+byte[] aesBytes = AESEncode(rawStr, key, channel, iv);
+if (null == aesBytes)
+{
+//aes加密失败
+return null;
+}</p>
+<pre><code>    string base64Encode = Convert.ToBase64String(aesBytes, 0, aesBytes.Length);
+
+    string urlEncodeStr = HttpUtility.UrlEncode(base64Encode, Encoding.UTF8);
+
+    return urlEncodeStr;
+}
+
+/**
+ * 对字符串进行aes加密
+ * @param rawStr
+ * @param key
+ * @param iv
+ * @return
+ */
+private static byte[] AESEncode(string rawStr, string key, string channel, string iv)
+{
+    if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(rawStr))
+    {
+        throw new Exception("加密key字符串是空或者加密字符串为空！");
+    }
+    string strMd5 = ToMd5(channel+key);
+
+    strMd5 = strMd5.Substring(strMd5.Length - 16).ToUpper();
+
+    if (null == strMd5)
+    {
+        return null;
+    }
+    byte[] bKey = Encoding.UTF8.GetBytes(strMd5);
+    byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+    byte[] bIV = ToByte(ivBytes, 16); ;
+    byte[] bStr = Encoding.UTF8.GetBytes(rawStr);
+    try
+    {
+        SymmetricAlgorithm desc = Aes.Create();
+        desc.Mode = CipherMode.CBC;//CipherMode.CBC
+        using (MemoryStream mStream = new MemoryStream())
+        {
+            using (CryptoStream cStream = new CryptoStream(mStream, desc.CreateEncryptor(bKey, bIV), CryptoStreamMode.Write))
+            {
+                cStream.Write(bStr, 0, bStr.Length);
+                cStream.FlushFinalBlock();
+                byte[] res = mStream.ToArray();
+                return res;
+            }
+        }
+    }
+    catch
+    {
+        return null;
+    }
+}
+
+/// &lt;summary&gt; 
+/// 把任意类型数据按字节读取到byte[] 
+/// &lt;/summary&gt; 
+/// &lt;param name="sIn"&gt;该类型的一个实例&lt;/param&gt; 
+/// &lt;param name="nLen"&gt;该类型的长度&lt;/param&gt; 
+/// &lt;returns&gt;字节流&lt;/returns&gt; 
+public static byte[] ToByte(byte[] bytes, int nLen)
+{
+    IntPtr psIn = IntPtr.Zero;
+    byte[] buffer = new byte[nLen];
+    int length = bytes.Length;
+    if (length &lt; 16)
+    {
+        for (int i = 0; i &lt; length; i++)
+        {
+            buffer[i] = bytes[i];
+        }
+        for (int i = length; i &lt; 16; i++)
+        {
+            buffer[i] = 0;
+        }
+        return buffer;
+    }
+    return bytes;
+}
+//将字节流转成指定类型 
+public static object ToObject(byte[] rawdatas, Type anytype)
+{
+    int rawsize = Marshal.SizeOf(anytype);
+    if (rawsize &gt; rawdatas.Length) return null;
+    IntPtr buffer = Marshal.AllocHGlobal(rawsize);//分配指定大小的内存,返回一个指针 
+    Marshal.Copy(rawdatas, 0, buffer, rawsize);
+    object retobj = Marshal.PtrToStructure(buffer, anytype);
+    Marshal.FreeHGlobal(buffer);
+    return retobj;
+}
+
+public static byte[] GenerateIV(string iv)
+{
+    if (null == iv || string.IsNullOrEmpty(iv))
+    {
+        return null;
+    }
+    try
+    {
+        byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+        return ToByte(ivBytes, 16);
+    }
+    catch (Exception e)
+    {
+        return null;
+    }
+}
+
+/**
+ * 获取字符串的md5
+ * @param str
+ * @return
+ */
+public static string ToMd5(string str)
+{
+    try
+    {
+        using (MD5 md5 = MD5.Create())
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
+            bytes = md5.ComputeHash(bytes);
+            if (null != bytes)
+            {
+                return ParseByte2HexStr(bytes);
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        return e.StackTrace;
+    }
+    return null;
+}
+
+/**
+ * 将二进制转换成16进制 
+ * @param buf 
+ * @return 
+ */
+public static String ParseByte2HexStr(byte[] bytes)
+{
+    string hexString = string.Empty;
+    if (bytes != null)
+    {
+        StringBuilder strB = new StringBuilder();
+
+        for (int i = 0; i &lt; bytes.Length; i++)
+        {
+            strB.Append(bytes[i].ToString("X2"));
+        }
+        hexString = strB.ToString();
+    }
+    return hexString;
+}</code></pre>
+<p>}
+}</p>
+<pre><code>
+PHP示例程序：</code></pre>
+</li>
+</ul>
+<pre><code class="language-php">/*
+ * Copyright (C) 2015 Baidu Inc. All rights reserved.
+ */
+class CryptAES {
+    /**
+     * @brief 加密
+     *
+     * @param $usData 需要加密的明文
+     * @param $from   渠道标示
+     * @param $secret secret
+     * @param $iv     iv
+     *
+     * @return string
+     */
+    public static function encode($usData, $from, $secret, $iv) {
+        if (!self::_validParams($from, $secret, $iv)) {
+            return false;
+        }
+
+        list($key, $iv) = self::_init($from, $secret, $iv);
+        $usData         = self::pad($usData);
+        $enmcrypt       = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+        mcrypt_generic_init($enmcrypt, $key, $iv);
+
+        // 加密
+        $data = mcrypt_generic($enmcrypt, $usData);
+        $data = urlencode(base64_encode($data));
+        mcrypt_generic_deinit($enmcrypt);
+        mcrypt_module_close($enmcrypt);
+
+        return $data;
+    }
+
+    /**
+     * @brief 解密
+     *
+     * @param $usData 需要解密的密文
+     * @param $from   渠道标示
+     * @param $secret secret
+     * @param $iv     iv
+     *
+     * @return string
+     */
+    public static function decode($usData, $from, $secret, $iv) {
+        if (empty($usData) || !self::_validParams($from, $secret, $iv)) {
+            return false;
+        }
+
+        list($key, $iv) = self::_init($from, $secret, $iv);
+        $usData         = base64_decode(urldecode($usData));
+        $enmcrypt       = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+        mcrypt_generic_init($enmcrypt, $key, $iv);
+        $data = mdecrypt_generic($enmcrypt, $usData);
+        mcrypt_generic_deinit($enmcrypt);
+        mcrypt_module_close($enmcrypt);
+        return self::unpad($data);
+    }
+
+    /**
+     * @brief 初始化加密参数
+     *
+     * @param $from
+     * @param $secret
+     * @param $iv
+     *
+     * @return 
+     */
+    private static function _init($from, $secret, $iv) {
+        // 获取加密key
+        $key = strtoupper(substr(md5($from . $secret), -16));
+        // 如果iv长度不足16字节，进行补足
+        $iv  = str_pad(substr($iv, 0, 16), 16, chr(0));
+
+        return array($key, $iv);
+    }
+
+    /**
+     * @brief 验参
+     *
+     * @param $from
+     * @param $secret
+     * @param $iv
+     *
+     * @return 
+     */
+    private static function _validParams($from, $secret, $iv) {
+        if (empty($from) || empty($secret) || empty($iv)) {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * @brief pkcs 填充
+     *
+     * @param $text string
+     *
+     * @return string
+     */
+    public static function pad($text) {
+        $blocksize = 16;
+        $pad       = $blocksize - (strlen($text) % $blocksize);
+        return $text . str_repeat(chr($pad), $pad);
+    }
+
+    /**
+     * @brief 解pkcs
+     *
+     * @param $text string
+     *
+     * @return string
+     */
+    public static function unpad($text) {
+        $pad = ord($text{strlen($text) - 1});
+        if ($pad &gt; strlen($text)) return false;
+        if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return false;
+        return substr($text, 0, -1 * $pad);
+    }
+}</code></pre>
+<h5 id="-1">示例</h5>
+<h6 id="imei">imei原文：</h6>
+<p>1231414124131231</p>
+<h6 id="iv">渠道号、密钥及iv：</h6>
+<p>渠道号：testiD
+密钥：testiD
+iv：12345678</p>
+<h6 id="-2">密文：</h6>
+<p>oHYCp0y3sur6VerprhWrjFParjYcUZkIUpVsqQEpPTU%3D</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>
