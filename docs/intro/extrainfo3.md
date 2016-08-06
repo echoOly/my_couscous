@@ -1,3 +1,6 @@
+---
+currentMenu: extrainfo3
+---
 ### sign生成算法(签名) ###
 ------------
 1.	将接口请求参数（含get及post）用&字符拼接。
@@ -28,9 +31,9 @@ public static String toMd5(String str){
     return null;
 }
 /**
- * 将二进制转换成16进制 
- * @param buf 
- * @return 
+ * 将二进制转换成16进制
+ * @param buf
+ * @return
  */  
 public static String parseByte2HexStr(byte buf[]) {  
     if (null == buf) {

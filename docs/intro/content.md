@@ -1,3 +1,6 @@
+---
+currentMenu: content
+---
 ## 内容接口【action=search&[docid/package]=xxx】
 获取指定应用内容详细信息
 

@@ -1,3 +1,6 @@
+---
+currentMenu: extrainfo2
+---
 ### 数据加密算法 ###
 ------------
 
@@ -34,12 +37,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * 
+ *
  * @author yuanxingzhong
  * @since 2015年12月16日
  */
 public final class AESUtility {
-    
+
     /**
      * 加密，先aes，再base64再urlencode
      * @param rawStr
@@ -57,14 +60,14 @@ public final class AESUtility {
             System.err.println("aes加密失败");
             return null;
         }
-        
+
         String base64Encode = Base64.getEncoder().encodeToString(aesBytes);
-        
+
         String urlEncodeStr =  URLEncoder.encode(base64Encode);
-        
+
         return urlEncodeStr;
     }
-    
+
     /**
      * 对字符串进行aes加密
      * @param rawStr
@@ -78,25 +81,25 @@ public final class AESUtility {
             if (null != iv && !iv.isEmpty()) {
                 ivParam = new IvParameterSpec(generateIV(iv));
             }
-            
+
             String strMd5 = toMd5(from + key);
             if (null == strMd5) {
                 System.err.println("生成key失败！");
                 return null;
             }
             byte[] strBytes = strMd5.getBytes("utf-8");
-            
+
             SecretKeySpec cipherKey = new SecretKeySpec(strBytes, strBytes.length / 2, strBytes.length / 2, "AES");
-            
+
             Cipher encodeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             if (null != ivParam) {
                 encodeCipher.init(Cipher.ENCRYPT_MODE, cipherKey, ivParam);
             } else {
                 encodeCipher.init(Cipher.ENCRYPT_MODE, cipherKey);
             }
-            
+
             return encodeCipher.doFinal(rawStr.getBytes("utf-8"));
-            
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
@@ -114,7 +117,7 @@ public final class AESUtility {
         }
         return null;
     }
-    
+
     public static byte[] generateIV(String iv) {
         if (null == iv || iv.isEmpty()) {
             return null;
@@ -127,8 +130,8 @@ public final class AESUtility {
         }
         return null;
     }
-    
-    
+
+
     /**
      * 获取字符串的md5
      * @param str
@@ -148,12 +151,12 @@ public final class AESUtility {
         }
         return null;
     }
-    
-    
+
+
     /**
-     * 将二进制转换成16进制 
-     * @param buf 
-     * @return 
+     * 将二进制转换成16进制
+     * @param buf
+     * @return
      */  
     public static String parseByte2HexStr(byte buf[]) {  
         if (null == buf) {
@@ -168,8 +171,8 @@ public final class AESUtility {
             sb.append(hex.toUpperCase());  
         }  
         return sb.toString();  
-    } 
-    
+    }
+
 }
 ```
 .net示例程序：
@@ -263,12 +266,12 @@ namespace YYGJ.CollectApp.Job.JobHelpers.Helper
             }
         }
 
-        /// <summary> 
-        /// 把任意类型数据按字节读取到byte[] 
-        /// </summary> 
-        /// <param name="sIn">该类型的一个实例</param> 
-        /// <param name="nLen">该类型的长度</param> 
-        /// <returns>字节流</returns> 
+        /// <summary>
+        /// 把任意类型数据按字节读取到byte[]
+        /// </summary>
+        /// <param name="sIn">该类型的一个实例</param>
+        /// <param name="nLen">该类型的长度</param>
+        /// <returns>字节流</returns>
         public static byte[] ToByte(byte[] bytes, int nLen)
         {
             IntPtr psIn = IntPtr.Zero;
@@ -288,12 +291,12 @@ namespace YYGJ.CollectApp.Job.JobHelpers.Helper
             }
             return bytes;
         }
-        //将字节流转成指定类型 
+        //将字节流转成指定类型
         public static object ToObject(byte[] rawdatas, Type anytype)
         {
             int rawsize = Marshal.SizeOf(anytype);
             if (rawsize > rawdatas.Length) return null;
-            IntPtr buffer = Marshal.AllocHGlobal(rawsize);//分配指定大小的内存,返回一个指针 
+            IntPtr buffer = Marshal.AllocHGlobal(rawsize);//分配指定大小的内存,返回一个指针
             Marshal.Copy(rawdatas, 0, buffer, rawsize);
             object retobj = Marshal.PtrToStructure(buffer, anytype);
             Marshal.FreeHGlobal(buffer);
@@ -345,9 +348,9 @@ namespace YYGJ.CollectApp.Job.JobHelpers.Helper
         }
 
         /**
-         * 将二进制转换成16进制 
-         * @param buf 
-         * @return 
+         * 将二进制转换成16进制
+         * @param buf
+         * @return
          */
         public static String ParseByte2HexStr(byte[] bytes)
         {
@@ -435,7 +438,7 @@ class CryptAES {
      * @param $secret
      * @param $iv
      *
-     * @return 
+     * @return
      */
     private static function _init($from, $secret, $iv) {
         // 获取加密key
@@ -453,7 +456,7 @@ class CryptAES {
      * @param $secret
      * @param $iv
      *
-     * @return 
+     * @return
      */
     private static function _validParams($from, $secret, $iv) {
         if (empty($from) || empty($secret) || empty($iv)) {

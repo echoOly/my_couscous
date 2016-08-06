@@ -1,3 +1,6 @@
+---
+currentMenu: cpsdownload
+---
 ## CPS广告列表下载接口【action=getadfile】 ##
 商业合作方需要获取CPS广告数据，下载CPS广告文件。以XML方式返回CPS应用列表。每天04:00生成各渠道方对应XML文件，渠道方可定期下载(频度不要高于1次/小时)。请求的文件不存在时，接口返回HTTP状态:404 Not Found，并附带json错误提示（<red>请以HTTP状态码来判别</red>）。
 

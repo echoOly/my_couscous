@@ -1,3 +1,6 @@
+---
+currentMenu: sug
+---
 ## 内容建议【action=sug】
 获取搜索词的联想词
 

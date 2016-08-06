@@ -1,3 +1,6 @@
+---
+currentMenu: rec
+---
 ## 推荐接口【action=rec】
 获取推荐应用列表
 

@@ -1,98 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="zh-cn">
+	<meta name="keywords" content="{{ keywords|default('keywords') }}">
+	<meta name="description" content="{{ description|default('description') }}">
 
-        <title>{{ title }}</title>
+	<title>{{ title|default('title') }}</title>
 
-        <link rel="stylesheet" href="{{ baseUrl }}/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ baseUrl }}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ baseUrl }}/css/highlight.dark.css">
-        <link rel="stylesheet" href="{{ baseUrl }}/css/main.css">
-        
-    </head>
-    <style>
-    red{color: red;}
-    blockquote{font-style: italic}
-    h2{
-        padding-bottom: 0.3em;
-        font-size: 1.75em;
-        line-height: 1.225;
-        border-bottom: 1px solid #eee;
-        font-weight: bold;
-    }
-    blockquote.bs-callout.bs-callout-warning {
-        background-color: #FFF8D3;
-        border-color: #EBC372;
-    }
-    </style>
-    <body>
+	<link rel="stylesheet" type="text/css" href="{{ baseUrl1 }}/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ baseUrl1 }}/css/detail.css">
+	<link rel="stylesheet" type="text/css" href="{{ baseUrl1 }}/css/markdownbody.css">
+</head>
 
-        <header class="navbar navbar-default navbar-fixed-top">
+<body>
+	<header class="detail-headfix">
+		<nav class="w-1000 clearfix">
+			<a href="{{ baseUrl1 }}" class="head-logo" target="_blank">
+				<h2 style="font-size:28px;">
+					{{ title }}
+				<!-- <img src="{{ baseUrl1 }}/images/logo.png" class="jklogo" > -->
+			</h2>
+			</a>
+			<ul class="head-catalog">
+				{% for itemId, item in header.items %}
+					<li class="head-catalog-list {{ itemId == currentMenu ? 'active' }}">
+						<a href="{{ item.absoluteUrl|default(baseUrl1 ~ '/' ~ item.relativeUrl) }}">
+							{{ item.text|raw }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</nav>
+	</header>
 
-            <a class="navbar-brand" href="{{ baseUrl }}/">
-                {{ title|default('The title') }}
-                <small class="hidden-xs hidden-sm">
-                    {{ subTitle|default('This is the default subtitle!') }}
-                </small>
-            </a>
+	<div class="detail-wrapper w-1000  clearfix">
+		<div class="detail-left">
+			<ul class="detail-nav">
+				{% for itemId, item in menu.items %}
+					<li class="detail-navlist navlist-one {{ itemId == currentMenu ? 'navlist-active activekey-one' }}">
+						<div class="detail-navlist-title">
+							{% if item.absoluteUrl is defined %}
+							<a href="{{ item.absoluteUrl }}">
+								{{ item.text|raw }}
+							</a>
+							{% elseif item.relativeUrl is defined %}
+								<a href="{{ baseUrl1 ~ '/' ~ item.relativeUrl }}">
+									{{ item.text|raw }}
+								</a>
+							{% else %}
+								<a href="#">
+									{{ item.text|raw }}
+								</a>
+							{% endif %}
 
-            {% if github is defined %}
-                <a href="https://github.com/{{ github.user }}/{{ github.repo }}">
-                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
-                </a>
-            {% endif %}
+							{% if item.items is defined %}
+								<div class="navlist-more more-one nav-down"></div>
+							{% endif %}
+						</div>
+						{% if item.items is defined %}
+						<ul class="navul-one {{ itemId == currentMenu ? 'navlist-active activekey-one' }}">
+							{% for itemId1, item1 in item.items %}
+							<li class="detail-navlist {{ itemId1 == currentMenu ? 'navlist-active' }}">
+								<div class="detail-navlist-title title-two ">
+									<a href="{{ item1.absoluteUrl|default(baseUrl1 ~ '/' ~ item1.relativeUrl) }}">
+										{{ item1.text|raw }}
+									</a>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
 
-        </header>
+		<div class="detail-main">
+			<div class="markdown-body">
+				{{ content|raw }}
+			</div>
 
-        <main class="{{ menu ? 'container-fluid' : 'container' }}">
-            <div class="row">
+			<div class="wiki-right">
+				<div class="backtotop">
+					<a href="javascript:;" class="btn-backtotop" style="">
+						<div class="arrow"></div>
+						<div class="stick"></div>
+					</a>
+				</div>
+			</div>
+			<div class="previous-and-next mg-t20">
+				&nbsp;
+			</div>
+		</div>
 
-                {% if menu is defined %}
-
-                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
-
-                        <ul class="nav nav-pills nav-stacked">
-                            {% for itemId, item in menu.items %}
-                                <li class="{{ itemId == currentMenu ? 'active' }}">
-                                    <a href="{{ item.absoluteUrl|default(baseUrl ~ '/' ~ item.relativeUrl) }}">
-                                        {{ item.text|raw }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-                    </nav>
-
-                {% endif %}
-
-                <section id="content" class="{{ menu ? 'col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10 markdown-body' : 'col-sm-12' }}">
-                    {{ content|raw }}
-                </section>
-
-            </div>
-        </main>
-
-        <footer>
-            <div class="{{ menu ? 'container-fluid' : 'container' }}">
-                <p class="text-muted">
-                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
-                </p>
-            </div>
-        </footer>
-
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
-
-        <script>
-            $(function() {
-                $("section>h1").wrap('<div class="page-header" />');
-                // Syntax highlighting
-                hljs.initHighlightingOnLoad();
-            });
-        </script>
-
-    </body>
+	</div>
+	<script type="text/javascript" src="{{ baseUrl1 }}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ baseUrl1 }}/js/detail.js"></script>
+</body>
 </html>

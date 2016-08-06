@@ -1,3 +1,6 @@
+---
+currentMenu: extrainfo4
+---
 ### 返回APP字段说明 ###
 | 字段名称   | 说明
 | ------------ | ------------
@@ -34,7 +37,7 @@
 ### 分类说明 ###
 ------------
 |分类ID    |分类名称
-| ------------ | ------------ 
+| ------------ | ------------
 |400| 其他游戏
 |401| 休闲益智
 |402| 角色扮演
@@ -69,12 +72,10 @@
 </response>
 ```
 #### 返回码对照 ####
-|返回码 |返回提示  |  说明 
+|返回码 |返回提示  |  说明
 | ------------ | ------------ | ------------
 |0   |ok   | 返回正常
-|101 |token verified error   | Token验证错误 
+|101 |token verified error   | Token验证错误
 |105 |{bdi_xx} param need to be supplied for enter  |  bdi_xx字段必填
 |108 |{bdi_xx}, param is signed in a wrong type  | bdi_xx 参数错误
 |109 |sign verified error |签名错误
-
-

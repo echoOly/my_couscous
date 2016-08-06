@@ -1,3 +1,6 @@
+---
+currentMenu: topic
+---
 ## 专题接口【action=topic】
 获取指定专题列表数据
 
@@ -76,8 +79,8 @@
 参见 [附录4》返回APP字段说明](/api?bdi_docs=1&action=intro&source=natintro_extrainfo4 "附录4》返回APP字段说明")
 此外：
 
-|字段名称  | 备注 
-| ------------ | ------------ 
+|字段名称  | 备注
+| ------------ | ------------
 |type   | 分类 soft、game
 |catename   | 子分类名称，例:网络社区
 |score  | app打分

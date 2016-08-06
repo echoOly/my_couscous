@@ -1,3 +1,6 @@
+---
+currentMenu: privilege
+---
 ## 特权接口【action=privilege】
 获取百度手机助手客户端的特权数据
 
@@ -38,8 +41,8 @@
 参见 [附录4》返回APP字段说明](/api?bdi_docs=1&action=intro&source=natintro_extrainfo4 "附录4》返回APP字段说明")
 此外：
 
-|字段名称  | 备注 
-| ------------ | ------------ 
+|字段名称  | 备注
+| ------------ | ------------
 |privilegetime	|剩余时间，单位ms
 |privilegebegin	|开始
 |desc	|特权描述信息

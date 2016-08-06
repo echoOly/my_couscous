@@ -1,3 +1,6 @@
+---
+currentMenu: extrainfo1
+---
 ### signmd5生成算法 ###
 --------
 处理过程为：

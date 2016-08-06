@@ -1,3 +1,6 @@
+---
+currentMenu: cate
+---
 ## 分类接口【action=cate&id=*】
 获取某分类应用列表
 
@@ -97,4 +100,3 @@
 ```
 ### 错误说明 ###
 参见 [附录4》返回码对照表](/api?bdi_docs=1&action=intro&source=natintro_extrainfo4 "附录4》返回码对照表")
-

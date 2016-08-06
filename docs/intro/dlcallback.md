@@ -1,3 +1,6 @@
+---
+currentMenu: dlcallback
+---
 ## 下载完成回调 ##
 对于商业合作三方在下载应用完成后，需回调此接口，完成一次计费操作。<red>现阶段只有检索接口，返回dl_callback</red>
 

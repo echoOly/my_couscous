@@ -1,3 +1,6 @@
+---
+currentMenu: update
+---
 ## 更新接口【action=update】
 获取更新列表，更新是针对于同一款应用（即packagename相同），当出现更高版本号时，则认为需要更新。
 
@@ -36,7 +39,7 @@
 | ------------ | ------------ | ------------
 | data   | 应用信息json打包 | <red>必选</red>
 
-<tab></tab>除了上述get参数外，还必须通过post方式提交需升级应用的信息。提交的应用信息由package、versioncode、signmd5和md5四部分组成。应用信息采用json方式打包，一次可提交一个或者多个应用。如掌上百度和手机QQ两个应用时，信息打包成json后： 
+<tab></tab>除了上述get参数外，还必须通过post方式提交需升级应用的信息。提交的应用信息由package、versioncode、signmd5和md5四部分组成。应用信息采用json方式打包，一次可提交一个或者多个应用。如掌上百度和手机QQ两个应用时，信息打包成json后：
 ```
 [
     {

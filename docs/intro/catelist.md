@@ -1,3 +1,6 @@
+---
+currentMenu: catelist
+---
 ## 分类列表【action=cate】 ##
 获取分类列表
 
@@ -47,5 +50,3 @@
 ### 返回说明 ###
 ----------
 参见 [附录4》分类说明](/api?bdi_docs=1&action=intro&source=natintro_extrainfo4 "附录4》分类说明")
-
-
