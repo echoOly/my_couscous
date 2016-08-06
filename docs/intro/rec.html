@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="zh-cn">
+	<meta name="keywords" content="文档手册">
+	<meta name="description" content="写文档从此快乐">
+
+	<title>文档生成器</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/detail.css">
+	<link rel="stylesheet" type="text/css" href="/css/markdownbody.css">
+</head>
+
+<body>
+	<header class="detail-headfix">
+		<nav class="w-1000 clearfix">
+			<a href="" class="head-logo" target="_blank">
+				<h2 style="font-size:28px;">
+					文档生成器
+				<!-- <img src="/images/logo.png" class="jklogo" > -->
+			</h2>
+			</a>
+			<ul class="head-catalog">
+									<li class="head-catalog-list ">
+						<a href="/index.html">
+							首页
+						</a>
+					</li>
+									<li class="head-catalog-list ">
+						<a href="/./docs/intro/desc.html">
+							wiki
+						</a>
+					</li>
+							</ul>
+		</nav>
+	</header>
+
+	<div class="detail-wrapper w-1000  clearfix">
+		<div class="detail-left">
+			<ul class="detail-nav">
+									<li class="detail-navlist navlist-one ">
+						<div class="detail-navlist-title">
+															<a href="/./docs/intro/desc.html">
+									简介
+								</a>
+							
+													</div>
+											</li>
+									<li class="detail-navlist navlist-one ">
+						<div class="detail-navlist-title">
+															<a href="#">
+									数据接口
+								</a>
+							
+															<div class="navlist-more more-one nav-down"></div>
+													</div>
+												<ul class="navul-one ">
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/api.html">
+										调用须知
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/boardlist.html">
+										榜单列表
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/board.html">
+										榜单接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/catelist.html">
+										分类列表
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/cate.html">
+										分类接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/update.html">
+										更新接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/search.html">
+										检索接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist navlist-active">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/rec.html">
+										推荐接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/content.html">
+										内容接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/sug.html">
+										内容建议
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/privilege.html">
+										特权接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/topiclist.html">
+										专题列表
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/topic.html">
+										专题接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/redirect.html">
+										下载接口
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/dlcallback.html">
+										下载回调
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/cpsdownload.html">
+										CPS下载接口
+									</a>
+								</div>
+							</li>
+													</ul>
+											</li>
+									<li class="detail-navlist navlist-one ">
+						<div class="detail-navlist-title">
+															<a href="#">
+									附录
+								</a>
+							
+															<div class="navlist-more more-one nav-down"></div>
+													</div>
+												<ul class="navul-one ">
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/extrainfo1.html">
+										附录1- signmd5
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/extrainfo2.html">
+										附录2-数据加密
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/extrainfo3.html">
+										附录3-参数签名
+									</a>
+								</div>
+							</li>
+														<li class="detail-navlist ">
+								<div class="detail-navlist-title title-two ">
+									<a href="/./docs/intro/extrainfo4.html">
+										附录4-字段对照
+									</a>
+								</div>
+							</li>
+													</ul>
+											</li>
+									<li class="detail-navlist navlist-one ">
+						<div class="detail-navlist-title">
+															<a href="/./docs/intro/question.html">
+									常见问题
+								</a>
+							
+													</div>
+											</li>
+									<li class="detail-navlist navlist-one ">
+						<div class="detail-navlist-title">
+															<a href="/./docs/intro/about.html">
+									联系我们
+								</a>
+							
+													</div>
+											</li>
+							</ul>
+		</div>
+
+		<div class="detail-main">
+			<div class="markdown-body">
+				<h2 id="actionrec">推荐接口【action=rec】</h2>
+<p>获取推荐应用列表</p>
+<h2 id="">请求说明</h2>
+<h3 id="url">URL</h3>
+<blockquote>
+<p><a href="http://m.baidu.com/api?action=rec">http://m.baidu.com/api?action=rec</a></p>
+</blockquote>
+<h3 id="-1">请求方式</h3>
+<blockquote>
+<p>GET</p>
+</blockquote>
+<h3 id="-2">支持格式</h3>
+<blockquote>
+<p>JSON/XML (默认XML)</p>
+</blockquote>
+<h3 id="-3">请求参数</h3>
+<p>获取指定应用的推荐列表可通过docid和package两种方式：
+（一）、通过docid，请求参数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>备注</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from</td>
+<td>来源，合作方标识，由百度BD提供</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>token</td>
+<td>标记，由百度分配的唯一的token，用于验证请求方的合法性</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>type</td>
+<td>服务类别，type=app，对于android，type的值为app</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>docid</td>
+<td>应用ID</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>ua</td>
+<td>终端分辨率，机型信息</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>用户唯一标识</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_mac</td>
+<td>无线网卡mac地址</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_cid</td>
+<td>基站id</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_bear</td>
+<td>联网类型</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>dpi</td>
+<td>分辨率，宽_高，如320_640，用于适配</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>apileve</td>
+<td>API Level，用于适配</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<p>（二）、通过package，请求参数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>备注</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from</td>
+<td>来源，合作方标识，由百度BD提供</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>token</td>
+<td>标记，由百度分配的唯一的token，用于验证请求方的合法性</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>type</td>
+<td>服务类别，type=app，对于android，type的值为app</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>package</td>
+<td>apk的包名</td>
+<td><red>必选</red></td>
+</tr>
+<tr>
+<td>ua</td>
+<td>终端分辨率，机型信息</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>用户唯一标识</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_mac</td>
+<td>无线网卡mac地址</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_cid</td>
+<td>基站id</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bdi_bear</td>
+<td>联网类型</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>dpi</td>
+<td>分辨率，宽_高，如320_640，用于适配</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>apileve</td>
+<td>API Level，用于适配</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="bs-callout bs-callout-warning" style="padding:10px"><h4 id="-4">注意</h4>为更好进行机型和网络适配，对于所有请求参数，尽可能携带可选参数</blockquote>
+<h2 id="-5">返回结果</h2>
+<h3 id="xml">XML示例</h3>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;response&gt;
+    &lt;statuscode&gt;0&lt;/statuscode&gt;
+    &lt;statusmessage&gt;done&lt;/statusmessage&gt;
+    &lt;result&gt;
+        &lt;pn&gt;0&lt;/pn&gt;
+        &lt;rn&gt;2&lt;/rn&gt;
+        &lt;disp_num&gt;300&lt;/disp_num&gt;
+        &lt;ret_num&gt;2&lt;/ret_num&gt;
+        &lt;apps&gt;
+            &lt;app&gt;
+                &lt;sname&gt;
+                    &lt;!--[CDATA[ 爱奇艺 ]]--&gt;
+                &lt;/sname&gt;
+                &lt;size&gt;21093963&lt;/size&gt;
+                &lt;download_url&gt;
+                    &lt;!--[CDATA[ http://m.baidu.com/api?action=redirect&amp;token=yuntongdao&amp;from=1001714b&amp;type=app&amp;dltype=new&amp;tj=soft_9338638_3387500632_%E7%88%B1%E5%A5%87%E8%89%BA&amp;blink=5839687474703a2f2f612e67646f776e2e62616964752e636f6d2f646174612f7769736567616d652f663533346162346661383538613833392f6169716979695f38303734302e61706b3f66726f6d3d61313130313457&amp;crversion=1&amp;f=_OvOfgaM2og2u2ibgavv8_yFvzgPu28tgu29iga_vz_Ku28Fgavr8_aDvf_pa2zGguvGi_uZ2igau2iZ_u2wigum2i_Eu281_4vX8_4wv8_Oa282gy2BzgaX2o_su2i__avTigyhv8_favit_u298gatv8_Ku281gav58_ybv8g4av8U_yvs8_yB2zgJ4v8WgOvltgPWvz_yavfD_avJ8_y228g5aviUgu258gab2tglP28U_42m8_umvf_Ru2fQ_uvwiguZ2igauvim_uvOi_us2fgCu2is_P2Ni_advi_ra2oUgPvpzgaDvz_B42ingO2liga72zgsavzbgPvp8g4U28_JuvirA&amp;refp=action_rec
+                    ]]--&gt;
+                &lt;/download_url&gt;
+                &lt;icon&gt;
+                    &lt;!--[CDATA[ http://cdn00.baidu-img.cn/timg?vsapp&amp;size=b800_800&amp;quality=100&amp;imgtype=3&amp;er&amp;sec=0&amp;di=b1eedffc599b2ee01e2a4c5d8e935b88&amp;ref=http%3A%2F%2Ff.hiphotos.bdimg.com&amp;src=http%3A%2F%2Ff.hiphotos.bdimg.com%2Fwisegame%2Fpic%2Fitem%2F59292df5e0fe9925c120efa333a85edf8db17111.jpg
+                    ]]--&gt;
+                &lt;/icon&gt;
+                &lt;versionname&gt;7.4&lt;/versionname&gt;
+                &lt;updatetime&gt;2016-05-05&lt;/updatetime&gt;
+            &lt;/app&gt;
+            &lt;app&gt;
+                &lt;sname&gt;
+                    &lt;!--[CDATA[ 9块9包邮汇 ]]--&gt;
+                &lt;/sname&gt;
+                &lt;size&gt;3829653&lt;/size&gt;
+                &lt;download_url&gt;
+                    &lt;!--[CDATA[ http://m.baidu.com/api?action=redirect&amp;token=yuntongdao&amp;from=1001714b&amp;type=app&amp;dltype=new&amp;tj=soft_8919870_1161768_9%E5%9D%979%E5%8C%85%E9%82%AE%E6%B1%87&amp;blink=5839687474703a2f2f612e67646f776e2e62616964752e636f6d2f646174612f7769736567616d652f303235613865623237396531326465392f396b7561693962616f796f756875695f35342e61706b3f66726f6d3d61313130313457&amp;crversion=1&amp;f=_OvOfgaM2og2u2ibgavv8_yFvzgPu28tgu29iga_vz_Ku28Fgavr8_aDvf_pa2zGguvGi_uZ2igau2iZ_u2wigum2i_Eu281_4vX8_4w28_Aa282gy2BzgaX2o_su2i__avTigyhv8_favit_u298gatv8_Ku281gav58_ybv8g4av8U_yvs8_yB2zgJy2z7gav0tgPDvfgpyv8-gyv0zgOLv8_r4v8UgavltgyDvtgpa2iYgavviguD28gsa2tDgP2p8_4w28_muvfQ_u2Ef_usvigxu2iZguvmi_uQvi_Ru2fQgu2Mi_P32i_CaviU_a2vogPDvzg0avzb_422igOY2igpa2zGgavszgPDv8gJ428U_uv8iAqdB&amp;refp=action_rec
+                    ]]--&gt;
+                &lt;/download_url&gt;
+                &lt;icon&gt;
+                    &lt;!--[CDATA[ http://cdn00.baidu-img.cn/timg?vsapp&amp;size=b800_800&amp;quality=100&amp;imgtype=3&amp;er&amp;sec=0&amp;di=a517152de32f144c4be1cafaff7f8e08&amp;ref=http%3A%2F%2Fa.hiphotos.bdimg.com&amp;src=http%3A%2F%2Fa.hiphotos.bdimg.com%2Fwisegame%2Fpic%2Fitem%2F462dd42a2834349bbb6668eaceea15ce36d3be79.jpg
+                    ]]--&gt;
+                &lt;/icon&gt;
+                &lt;versionname&gt;2.66&lt;/versionname&gt;
+                &lt;updatetime&gt;2016-02-25&lt;/updatetime&gt;
+            &lt;/app&gt;
+            ...
+        &lt;/apps&gt;
+    &lt;/result&gt;
+&lt;/response&gt;</code></pre>
+<h3 id="-6">返回字段说明</h3>
+<hr />
+<p>参见 <a href="/api?bdi_docs=1&amp;action=intro&amp;source=natintro_extrainfo4" title="附录4》返回APP字段说明">附录4》返回APP字段说明</a></p>
+<h3 id="-7">错误示例</h3>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;response&gt;
+    &lt;statuscode&gt;108&lt;/statuscode&gt;
+    &lt;statusmessage&gt;[from] , param is signed in a wrong type&lt;/statusmessage&gt;
+&lt;/response&gt;</code></pre>
+<h3 id="-8">错误说明</h3>
+<p>参见 <a href="/api?bdi_docs=1&amp;action=intro&amp;source=natintro_extrainfo4" title="附录4》返回码对照表">附录4》返回码对照表</a></p>
+			</div>
+
+			<div class="wiki-right">
+				<div class="backtotop">
+					<a href="javascript:;" class="btn-backtotop" style="">
+						<div class="arrow"></div>
+						<div class="stick"></div>
+					</a>
+				</div>
+			</div>
+			<div class="previous-and-next mg-t20">
+				&nbsp;
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/detail.js"></script>
+</body>
+</html>
