@@ -3,13 +3,13 @@ template:
 
 github:
     user: yptangecho@163.com
-    repo: my-project
+    repo: echooly
 
 keywords: 文档手册
 description: 写文档从此快乐
 title: 文档生成器
 subTitle: An amazing template for Couscous.
-baseUrl: https://echoOly.github.com/my-project
+baseUrl: https://echooly.github.com/my_couscous
 
 # The header menu
 header:
