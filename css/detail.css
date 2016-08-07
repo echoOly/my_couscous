@@ -341,3 +341,22 @@ img {
 .active{
     color: #35b558 !important;
 }
+
+// 以下是自定义markdown样式
+.markdown-body blockquote, .markdown-body blockquote p {
+    color: #666;
+    font-style: italic;
+}
+red {
+    color: red;
+}
+.bs-callout-warning h4 {
+    color: #DF9619;
+}
+blockquote.bs-callout.bs-callout-warning {
+    background-color: #FFF8D3;
+    border-color: #EBC372;
+}
+.markdown-body table thead tr {
+    background-color: #F8F8F8;
+}
