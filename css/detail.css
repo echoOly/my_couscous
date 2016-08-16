@@ -169,6 +169,7 @@ img {
   color: #666;
   display: block;
   padding: 5px 0 5px 25px;
+  font-size: 14px;
 }
 .detail-wrapper .detail-left .detail-nav .detail-navlist .title-two .more-two {
   height: 25px;

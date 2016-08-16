@@ -1,7 +1,7 @@
 ---
 currentMenu: home
 ---
-# Couscous Light template
+# markdown to html 文档生成器
 
 ![](screenshot.png)
 
@@ -11,7 +11,7 @@ To use the template, set it up in your `couscous.yml` configuration file:
 
 ```yaml
 template:
-    url: https://github.com/CouscousPHP/Template-Light
+    url: https://github.com/echoOly/my_couscous
 ```
 
 ## Configuration
@@ -64,8 +64,20 @@ currentMenu: home
 # Welcome
 ```
 #使用说明
-- curl -OS http://couscous.io/couscous.phar
+- curl -OS http://couscous.io/couscous.phar， 如果项目中已经存在不需要该操作
 - php couscous.phar preview (deploy发布到gh-page)
-- 编辑`couscous.yml`，自定义页面模板`default.twig`,编辑markdown文件
+- 编辑`couscous.yml`，自定义页面模板`default.twig`,编辑markdown文件。（示例已经存在）
 - 将在.couscous/generated下生产html
+- 浏览器中预览：`http://127.0.0.1:8000/`
 - 如果报错，删除.couscous/ 即rm -rf .couscous
+
+# 下载地址
+https://github.com/echoOly/my_couscous
+
+# 支持我们
+
+- 微信
+![](./images/weixin_pay.JPG)
+
+- 支付宝
+![](./images/ali_pay.jpeg)

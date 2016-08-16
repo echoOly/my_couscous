@@ -31,71 +31,20 @@ menu:
             text: 简介
             relativeUrl: ./docs/intro/desc.html
         interface:
-            text: 数据接口
+            text: 示例
             items:
                 api:
-                    text: 调用须知
+                    text: 须知示例
                     relativeUrl: ./docs/intro/api.html
-                boardlist:
-                    text: 榜单列表
-                    relativeUrl: ./docs/intro/boardlist.html
                 board:
-                    text: 榜单接口
+                    text: 接口示例
                     relativeUrl: ./docs/intro/board.html
-                catelist:
-                    text: 分类列表
-                    relativeUrl: ./docs/intro/catelist.html
-                cate:
-                    text: 分类接口
-                    relativeUrl: ./docs/intro/cate.html
-                update:
-                    text: 更新接口
-                    relativeUrl: ./docs/intro/update.html
-                search:
-                    text: 检索接口
-                    relativeUrl: ./docs/intro/search.html
-                rec:
-                    text: 推荐接口
-                    relativeUrl: ./docs/intro/rec.html
-                content:
-                    text: 内容接口
-                    relativeUrl: ./docs/intro/content.html
-                sug:
-                    text: 内容建议
-                    relativeUrl: ./docs/intro/sug.html
-                privilege:
-                    text: 特权接口
-                    relativeUrl: ./docs/intro/privilege.html
-                topiclist:
-                    text: 专题列表
-                    relativeUrl: ./docs/intro/topiclist.html
-                topic:
-                    text: 专题接口
-                    relativeUrl: ./docs/intro/topic.html
-                redirect:
-                    text: 下载接口
-                    relativeUrl: ./docs/intro/redirect.html
-                dlcallback:
-                    text: 下载回调
-                    relativeUrl: ./docs/intro/dlcallback.html
-                cpsdownload:
-                    text: CPS下载接口
-                    relativeUrl: ./docs/intro/cpsdownload.html
         extrainfo:
             text: 附录
             items:
                 extrainfo1:
-                    text: 附录1- signmd5
-                    relativeUrl: ./docs/intro/extrainfo1.html
-                extrainfo2:
-                    text: 附录2-数据加密
-                    relativeUrl: ./docs/intro/extrainfo2.html
-                extrainfo3:
-                    text: 附录3-参数签名
-                    relativeUrl: ./docs/intro/extrainfo3.html
-                extrainfo4:
-                    text: 附录4-字段对照
-                    relativeUrl: ./docs/intro/extrainfo4.html
+                    text: 附录1
+                    relativeUrl: ./docs/intro/extrainfo.html
         question:
             text: 常见问题
             relativeUrl: ./docs/intro/question.html
