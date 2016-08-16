@@ -74,6 +74,12 @@ currentMenu: home
 # 下载地址
 https://github.com/echoOly/my_couscous
 
+# 预览
+http://doc.9aipay.com/
+
+# 如有疑问
+qq群：15717867
+
 # 支持我们
 
 - 微信
