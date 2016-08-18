@@ -66,6 +66,7 @@ currentMenu: home
 #使用说明
 - curl -OS http://couscous.io/couscous.phar， 如果项目中已经存在不需要该操作
 - php couscous.phar preview (deploy发布到gh-page)
+![](images/pre.png)
 - 编辑`couscous.yml`，自定义页面模板`default.twig`,编辑markdown文件。（示例已经存在）
 - 将在.couscous/generated下生产html
 - 浏览器中预览：`http://127.0.0.1:8000/`
