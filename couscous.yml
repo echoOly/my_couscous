@@ -39,6 +39,12 @@ menu:
                 board:
                     text: 接口示例
                     relativeUrl: ./docs/intro/board.html
+        store:
+            text: 存储
+            items:
+                redis:
+                    text: redis
+                    relativeUrl: ./docs/store/redis.html
         extrainfo:
             text: 附录
             items:
