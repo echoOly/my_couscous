@@ -50,5 +50,8 @@ To set the current menu item (i.e. highlighted menu item), set the `currentMenu`
 key in the Markdown files:
 
 ```
+---
 currentMenu: home
+---
+# Welcome
 ```
